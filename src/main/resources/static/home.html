@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>カードゲーム - ホーム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .home-container {
+            background: #16213e;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            width: 360px;
+            text-align: center;
+        }
+        h1 { color: #f39c12; margin-bottom: 10px; }
+        .user-info {
+            background: #0f3460;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        .menu-btn {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-battle { background: #e94560; }
+        .btn-battle:hover { background: #ff6b81; }
+        .btn-deck { background: #00b4d8; }
+        .btn-deck:hover { background: #90e0ef; color: #000; }
+        .btn-logout { background: #555; margin-top: 10px; }
+        .btn-logout:hover { background: #777; }
+    </style>
+</head>
+<body>
+
+<div class="home-container">
+    <h1>CARD GAME</h1>
+    
+    <div class="user-info">
+        プレイヤー: <span id="username-display">---</span>
+    </div>
+
+    <button class="menu-btn btn-battle" onclick="location.href='/index.html'">⚔️ 対戦を始める</button>
+    <button class="menu-btn btn-deck" onclick="location.href='/deck.html'">🎴 デッキ構築</button>
+    <button class="menu-btn btn-logout" onclick="logout()">ログアウト</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const storedUser = localStorage.getItem('user');
+        if (!storedUser) {
+            window.location.href = '/login.html';
+            return;
+        }
+        const user = JSON.parse(storedUser);
+        document.getElementById('username-display').innerText = user.username;
+    });
+
+    function logout() {
+        localStorage.removeItem('user');
+        window.location.href = '/login.html';
+    }
+</script>
+
+</body>
+</html>
